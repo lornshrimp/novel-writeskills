@@ -4,14 +4,11 @@
 
 # 多平台输出 SOP：指定单章/多章 → 生成多平台版本并落盘
 
-## 题材总路由（新增硬性）
+## 关联技能（平台适配专属）
 
-除各平台已有的 `都市悬疑-输出*版` 题材 Skill 外，本 SOP 在开始执行任何平台分发前，必须先显式调用：
+[`adapt-platform-fiction`｜多平台小说适配](../skills/adapt-platform-fiction/SKILL.md)
 
-- `都市悬疑-提纯多平台母稿`
-- `都市悬疑-多平台小说适配`
-
-执行顺序默认应为：先提纯母稿与锁定题材底盘，再用“多平台适配”拉开平台差异，最后逐平台调用对应 `都市悬疑-输出*版` Skill。Prompt 不得直接绕过这两层题材 Skill 去做统一中性改写。
+当任务涉及“平台读者画像差异 / 节奏与关系权重拉开 / 标题倾向拉开 / 英文三平台风格分化 / 在不丢平台感前提下降相似度”时，必须优先加载并遵循该 skill。
 
 ## 执行节奏（新增硬性要求）
 
@@ -106,11 +103,11 @@
 
 ## 已迁移到技能资产的详细规则
 
-以下“平台风格服从原则 / 降相似度正确姿势 / 中英平台撞车修复顺序”，已迁移到 `都市悬疑-多平台小说适配` 的 references 中，执行本 SOP 时必须优先加载：
+以下“平台风格服从原则 / 降相似度正确姿势 / 中英平台撞车修复顺序”，已迁移到 `adapt-platform-fiction` 的 references 中，执行本 SOP 时必须优先加载：
 
-- `../skills/都市悬疑-多平台小说适配/references/平台差异矩阵.md`
-- `../skills/都市悬疑-多平台小说适配/references/多平台改写前推演清单.md`
-- `../skills/都市悬疑-多平台小说适配/references/平台风格总则与撞车修复.md`
+- `../skills/adapt-platform-fiction/references/平台差异矩阵.md`
+- `../skills/adapt-platform-fiction/references/多平台改写前推演清单.md`
+- `../skills/adapt-platform-fiction/references/平台风格总则与撞车修复.md`
 
 本 SOP 本体只保留编排、落盘、门禁、终检与摘要职责；凡属“平台化方法知识”，以对应 skill references 为准。
 
