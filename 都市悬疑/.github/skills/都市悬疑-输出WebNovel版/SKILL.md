@@ -23,6 +23,7 @@ argument-hint: '例如：把都市悬疑某章改成更适合 WebNovel 的英文
 - `references/题材边界与来源.md`
 - `references/执行细则与题材补丁.md`
 - `references/分节级补救映射与详细规则回填.md`
+- `references/平台研究补充.md`
 
 ## 命中本技能时的工作重心
 
