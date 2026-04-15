@@ -18,6 +18,16 @@ argument-hint: '例如：给第12章整章去AI味 / 只处理这一段模板腔
 - 将去 AI 味的共性骨架路由到 `通用-去AI味重写`。
 - 补充都市悬疑题材下的程序 / 证据口径、数值双轨、冷压迫来源与作者编号清理边界。
 
+## 继续读取的题材 references
+
+- `references/去AI味执行清单.md`
+- `references/数值双轨与视角保护.md`
+- `references/AI味识别雷达.md`
+- `references/三级改造与工具包.md`
+- `references/AI味识别与改写工具包.md`
+- `references/通用风格与排版补充.md`
+- `references/实战自检与陷阱.md`
+
 ## 强制要求
 
 - 命中本技能时，必须同时加载并使用当前题材 Skill 与 `通用-去AI味重写`。
