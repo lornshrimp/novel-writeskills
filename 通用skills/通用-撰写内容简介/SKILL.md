@@ -19,7 +19,10 @@ argument-hint: '要写哪部作品的内容简介？默认按“题材 + 主角 
 - `references/腾讯专栏简介圆桌多维增补.md`
 - `references/腾讯专栏简介五要五不要增补.md`
 - `references/腾讯专栏简介五要五不要增补.md`
-- `references/腾讯专栏简介多编辑规范增补.md`
+ - `references/腾讯专栏简介多编辑规范增补.md`
+ - `references/腾讯专栏简介三要素与职业身份具体化增补.md`
+ - `references/腾讯专栏简介三要素与职业身份具体化增补.md`
+ - `references/腾讯专栏简介取巧法与平台风格分类增补.md`
 
 ## 常见触发词 / 用户说法速查
 
