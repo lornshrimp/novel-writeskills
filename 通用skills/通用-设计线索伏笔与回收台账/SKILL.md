@@ -14,6 +14,7 @@ argument-hint: '要处理哪份线索/伏笔台账？默认同时检查字段结
 - `references/回收窗口与兑现检查.md`
 - `references/超长篇伏笔台账与回收节奏.md`
 - `references/推理公平性与谜底兑现检查.md`
+- `references/腾讯专栏悬疑线索与铺垫规则增补.md`
 
 ## 常见触发词 / 用户说法速查
 

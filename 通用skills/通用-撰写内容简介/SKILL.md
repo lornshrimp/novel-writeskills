@@ -15,6 +15,11 @@ argument-hint: '要写哪部作品的内容简介？默认按“题材 + 主角 
 - `references/平台简介差异提醒.md`
 - `references/简介落盘与版本管理.md`
 - `references/腾讯专栏简介首句与标签增补.md`
+- `references/腾讯专栏简介首句与标签增补.md`
+- `references/腾讯专栏简介圆桌多维增补.md`
+- `references/腾讯专栏简介五要五不要增补.md`
+- `references/腾讯专栏简介五要五不要增补.md`
+- `references/腾讯专栏简介多编辑规范增补.md`
 
 ## 常见触发词 / 用户说法速查
 
