@@ -122,19 +122,42 @@ function Get-BodyMetaNarrationHits {
     return @()
   }
 
-  $phrases = @('这几章', '前几章', '上一章', '下一章', '本章', '这章', '后文会', '我们会看到', '读者会发现')
+  $metaNarrationRules = @(
+    [pscustomobject]@{ family = 'relative_chapter_span'; regex = [regex]'(?:(?:前|后)(?:面)?(?:这)?几章|这几章)' },
+    [pscustomobject]@{ family = 'whole_chapter'; regex = [regex]'(?:(?:这(?:一)?整章)|整章)' },
+    [pscustomobject]@{ family = 'adjacent_chapter'; regex = [regex]'(?:上|下)一章' },
+    [pscustomobject]@{ family = 'current_chapter'; regex = [regex]'(?:本|这)章' },
+    [pscustomobject]@{ family = 'later_text'; regex = [regex]'后文会' },
+    [pscustomobject]@{ family = 'we_will_see'; regex = [regex]'我们会看到' },
+    [pscustomobject]@{ family = 'reader_will_find'; regex = [regex]'读者会发现' }
+  )
   $hits = New-Object System.Collections.ArrayList
   $lines = $BodyText -split "\r?\n", 0
 
   for ($i = 0; $i -lt $lines.Count; $i++) {
     $line = [string]$lines[$i]
     if ([string]::IsNullOrEmpty($line)) { continue }
+    $lineHits = New-Object System.Collections.ArrayList
 
-    foreach ($phrase in $phrases) {
-      $offset = 0
-      while ($offset -lt $line.Length) {
-        $idx = $line.IndexOf($phrase, $offset, [System.StringComparison]::Ordinal)
-        if ($idx -lt 0) { break }
+    foreach ($rule in $metaNarrationRules) {
+      foreach ($m in $rule.regex.Matches($line)) {
+        $phrase = [string]$m.Value
+        $idx = [int]$m.Index
+        $candidateEnd = $idx + $phrase.Length
+
+        $overlaps = $false
+        foreach ($existing in $lineHits) {
+          $existingStart = [int]$existing.column - 1
+          $existingEnd = $existingStart + ([string]$existing.phrase).Length
+          if ($idx -lt $existingEnd -and $candidateEnd -gt $existingStart) {
+            $overlaps = $true
+            break
+          }
+        }
+
+        if ($overlaps) {
+          continue
+        }
 
         $excerpt = $line.Trim()
         if ($excerpt.Length -gt 80) {
@@ -143,15 +166,18 @@ function Get-BodyMetaNarrationHits {
           $excerpt = $line.Substring($windowStart, $windowLength).Trim()
         }
 
-        [void]$hits.Add([pscustomobject]@{
+        [void]$lineHits.Add([pscustomobject]@{
+          family = [string]$rule.family
           phrase = $phrase
           line = ($i + 1)
           column = ($idx + 1)
           excerpt = $excerpt
         })
-
-        $offset = $idx + $phrase.Length
       }
+    }
+
+    foreach ($lineHit in @($lineHits | Sort-Object column)) {
+      [void]$hits.Add($lineHit)
     }
   }
 
@@ -173,6 +199,7 @@ function Get-TextQuality {
   $bodyText = [string]$bodySection.Body
   $bodyMetaNarrationHits = @(Get-BodyMetaNarrationHits -BodyText $bodyText)
   $bodyMetaNarrationPhraseCount = $bodyMetaNarrationHits.Count
+  $bodyMetaNarrationFamiliesFound = @($bodyMetaNarrationHits | ForEach-Object { $_.family } | Select-Object -Unique)
   $bodyMetaNarrationPhrasesFound = @($bodyMetaNarrationHits | ForEach-Object { $_.phrase } | Select-Object -Unique)
   $bodyMetaNarrationHitsSample = @($bodyMetaNarrationHits | Select-Object -First 10)
 
@@ -325,6 +352,7 @@ function Get-TextQuality {
     bodySectionEndMarker = $bodySection.EndMarker
     bodySectionEndLine = $bodySection.EndLine
     bodyMetaNarrationPhraseCount = $bodyMetaNarrationPhraseCount
+    bodyMetaNarrationFamiliesFound = $bodyMetaNarrationFamiliesFound
     bodyMetaNarrationPhrasesFound = $bodyMetaNarrationPhrasesFound
     bodyMetaNarrationHitsSample = $bodyMetaNarrationHitsSample
     totalChars = $total
