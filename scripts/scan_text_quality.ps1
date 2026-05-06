@@ -65,6 +65,99 @@ if (-not $Paths -or $Paths.Count -eq 0) {
   throw 'Missing input: provide -Paths or -PathsJoined'
 }
 
+function Get-ReaderBodySection {
+  param([Parameter(Mandatory=$true)][AllowEmptyString()][string]$Text)
+
+  if ([string]::IsNullOrEmpty($Text)) {
+    return [pscustomobject]@{
+      Body = ""
+      EndMarker = ""
+      EndLine = -1
+      HasMarker = $false
+    }
+  }
+
+  $matches = @()
+  $markerPatterns = @(
+    [pscustomobject]@{ Marker = '## 作者有话说'; Pattern = '(?m)^## 作者有话说\b.*$' },
+    [pscustomobject]@{ Marker = '## 章节后记'; Pattern = '(?m)^## 章节后记\b.*$' },
+    [pscustomobject]@{ Marker = "## Author's Note"; Pattern = "(?m)^## Author's Note\b.*$" }
+  )
+
+  foreach ($rule in $markerPatterns) {
+    $m = [regex]::Match($Text, $rule.Pattern)
+    if ($m.Success) {
+      $matches += [pscustomobject]@{
+        Index = $m.Index
+        Marker = $rule.Marker
+      }
+    }
+  }
+
+  if ($matches.Count -eq 0) {
+    return [pscustomobject]@{
+      Body = $Text
+      EndMarker = ""
+      EndLine = -1
+      HasMarker = $false
+    }
+  }
+
+  $best = @($matches | Sort-Object Index | Select-Object -First 1)[0]
+  $body = $Text.Substring(0, $best.Index)
+  $endLine = if ($best.Index -gt 0) { ($Text.Substring(0, $best.Index) -split "`r?`n", 0).Count } else { 0 }
+
+  return [pscustomobject]@{
+    Body = $body
+    EndMarker = [string]$best.Marker
+    EndLine = $endLine
+    HasMarker = $true
+  }
+}
+
+function Get-BodyMetaNarrationHits {
+  param([Parameter(Mandatory=$true)][AllowEmptyString()][string]$BodyText)
+
+  if ([string]::IsNullOrEmpty($BodyText)) {
+    return @()
+  }
+
+  $phrases = @('这几章', '前几章', '上一章', '下一章', '本章', '这章', '后文会', '我们会看到', '读者会发现')
+  $hits = New-Object System.Collections.ArrayList
+  $lines = $BodyText -split "\r?\n", 0
+
+  for ($i = 0; $i -lt $lines.Count; $i++) {
+    $line = [string]$lines[$i]
+    if ([string]::IsNullOrEmpty($line)) { continue }
+
+    foreach ($phrase in $phrases) {
+      $offset = 0
+      while ($offset -lt $line.Length) {
+        $idx = $line.IndexOf($phrase, $offset, [System.StringComparison]::Ordinal)
+        if ($idx -lt 0) { break }
+
+        $excerpt = $line.Trim()
+        if ($excerpt.Length -gt 80) {
+          $windowStart = [Math]::Max(0, $idx - 18)
+          $windowLength = [Math]::Min(60, $line.Length - $windowStart)
+          $excerpt = $line.Substring($windowStart, $windowLength).Trim()
+        }
+
+        [void]$hits.Add([pscustomobject]@{
+          phrase = $phrase
+          line = ($i + 1)
+          column = ($idx + 1)
+          excerpt = $excerpt
+        })
+
+        $offset = $idx + $phrase.Length
+      }
+    }
+  }
+
+  return @($hits)
+}
+
 function Get-TextQuality {
   param([Parameter(Mandatory=$true)][string] $LiteralPath)
 
@@ -76,6 +169,12 @@ function Get-TextQuality {
   }
 
   $text = Read-TextBestEffort -Path $LiteralPath
+  $bodySection = Get-ReaderBodySection -Text $text
+  $bodyText = [string]$bodySection.Body
+  $bodyMetaNarrationHits = @(Get-BodyMetaNarrationHits -BodyText $bodyText)
+  $bodyMetaNarrationPhraseCount = $bodyMetaNarrationHits.Count
+  $bodyMetaNarrationPhrasesFound = @($bodyMetaNarrationHits | ForEach-Object { $_.phrase } | Select-Object -Unique)
+  $bodyMetaNarrationHitsSample = @($bodyMetaNarrationHits | Select-Object -First 10)
 
   # Explicit forbidden marker(s) / patterns (these are "noise" by SOP definition)
   $containsPadToGate = $text.Contains('PAD_TO_GATE')
@@ -211,6 +310,7 @@ function Get-TextQuality {
   if ($containsPadToGate) { $flags += 'contains_pad_to_gate_marker' }
   if ($uidLikeCount -gt 0) { $flags += 'has_uid_like_token' }
   if ($forbiddenAppendixCount -gt 0) { $flags += 'contains_forbidden_appendix_section' }
+  if ($bodyMetaNarrationPhraseCount -gt 0) { $flags += 'contains_body_meta_narration_phrase' }
 
   $privateUseLineNumbersSample = @($privateUseLineNos) | Sort-Object | Select-Object -First 10
   $replacementLineNumbersSample = @($replacementLineNos) | Sort-Object | Select-Object -First 10
@@ -222,6 +322,11 @@ function Get-TextQuality {
     containsPadToGate = $containsPadToGate
     uidLikeCount = $uidLikeCount
     forbiddenAppendixCount = $forbiddenAppendixCount
+    bodySectionEndMarker = $bodySection.EndMarker
+    bodySectionEndLine = $bodySection.EndLine
+    bodyMetaNarrationPhraseCount = $bodyMetaNarrationPhraseCount
+    bodyMetaNarrationPhrasesFound = $bodyMetaNarrationPhrasesFound
+    bodyMetaNarrationHitsSample = $bodyMetaNarrationHitsSample
     totalChars = $total
     cjkChars = $cjk
     asciiLetters = $asciiLetter

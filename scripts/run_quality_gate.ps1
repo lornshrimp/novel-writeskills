@@ -5,6 +5,7 @@
 .DESCRIPTION
   Wraps scripts/scan_text_quality.ps1.
   Writes a JSON report and prints a concise summary (no正文).
+  Reports QUALITY_NOT_PASSED when any flag is present, including body-only meta-narration hits.
   Always exits 0 (safe for SOP pipelines).
 #>
 
@@ -46,10 +47,29 @@ if ($flagged.Count -eq 0) {
   exit 0
 }
 
+Write-Output 'QUALITY_NOT_PASSED'
 Write-Output ("QUALITY_FLAGGED_FILES={0}" -f $flagged.Count)
 $flagged | ForEach-Object {
   $flags = (@($_.flags) -join ',')
   Write-Output ("{0}\tflags={1}" -f $_.path, $flags)
+
+  $metaCountProp = $_.PSObject.Properties['bodyMetaNarrationPhraseCount']
+  if ($null -ne $metaCountProp -and [int]$metaCountProp.Value -gt 0) {
+    $samples = @()
+    $sampleProp = $_.PSObject.Properties['bodyMetaNarrationHitsSample']
+    if ($null -ne $sampleProp -and $null -ne $sampleProp.Value) {
+      $samples = @($sampleProp.Value | ForEach-Object {
+        "{0}@L{1}C{2}" -f $_.phrase, $_.line, $_.column
+      })
+    }
+
+    if ($samples.Count -gt 0) {
+      Write-Output ("  BODY_META_NARRATION_NOT_PASSED count={0} hits={1}" -f [int]$metaCountProp.Value, ($samples -join '; '))
+    }
+    else {
+      Write-Output ("  BODY_META_NARRATION_NOT_PASSED count={0}" -f [int]$metaCountProp.Value)
+    }
+  }
 }
 Write-Output ("WROTE: {0}" -f $OutPath)
 exit 0
