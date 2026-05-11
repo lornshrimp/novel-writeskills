@@ -76,6 +76,10 @@ argument-hint: '要把哪一章输出为 WebNovel 版？默认按“保留核心
 
 ## 硬规则
 
+- 绝对禁止输出“抽象自述 + 动词模板 + 口径名词”的垃圾句群；凡出现类似“对照项落在… / 先把同一句话拆碎 / 先把顺滑的解释拆开 / 只求能追溯（复核、对得上）”等模板化短语，必须判定为污染并整稿回炉。
+- 严禁使用或间接调用以下脚本对正文做生成、扩写、拼接或降重：`scripts/append_cn_unique_monologue.ps1`、`scripts/append_cn_unique_narration.ps1`、`scripts/append_cn_unique_thirdperson.ps1`、`scripts/rephrase_cn_body.ps1`、`scripts/rephrase_en_body.ps1`、`scripts/cn_lexicon_profile_transform.ps1`。这些工具不得进入平台正文生产链路。
+- 平台稿新增“模板句污染清零门禁”：正文不得出现连续 2 句及以上“我/我这边/我心里… + 把/将… + 对齐/校准/锁死/拆开… + 连接词 + 口径名词 + 只求/不求/先把…”结构；命中即失败，不论字数与相似度是否通过。
+
 - 命中本技能时，必须同时加载对应题材的 `题材名-输出WebNovel版` Skill。
 - 题材特有规则不得回写到本文件中平行维护。
 - 修改 WebNovel 平台共性规则时，应优先修改本 Skill，而不是多个题材入口。
