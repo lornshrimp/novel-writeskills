@@ -63,6 +63,13 @@ argument-hint: '要把哪一章输出为 WebNovel 版？默认按“保留核心
 4. 若需追溯历史迁移来源或核对旧条款，再回看“历史迁移参考”，不得本末倒置。
 5. 最后才处理降相似度，不得为了降重破坏英文可读性与平台节奏。
 
+## POV 契约与连续性（强制）
+
+- 若本次由 `通用-多平台输出编排` 调度，必须继承该流程已锁定的 `platformPovContract`，不得在本 Skill 内重新决定使用第一人称还是第三人称。
+- 若用户直接命中本 Skill，则必须在改写前先从源稿正文与当前平台已完成前序章节中推断并锁定 `platformPovContract`；默认优先级为：用户明确指定 > 当前平台已完成前序章节 > 源稿既有 POV 链路 > 本批次首个已通过章节。
+- 未获批准不得把连续章节从稳定第一人称切成第三人称，或从稳定第三人称切成第一人称；若源章本来就是视角切换章 / 多视角连续章，只能按已登记 `switchPlan` 执行，不得临场换壳。
+- 落盘前后都必须显式执行 POV 校验，并把结果写入日志或执行记录；英文平台默认使用 `scripts/pov_validate.py` 或 `scripts/run_pov_gate.ps1` 以 `lang=en` 或 `auto` 复核正文区块，第三人称链路检查对话外第一 / 第二人称，第一人称链路检查对话外第一人称锚点。
+
 ## 默认输出口径
 
 - 默认输出一版可直接继续落盘或进入平台终检的 WebNovel 英文派生正文。
@@ -79,6 +86,8 @@ argument-hint: '要把哪一章输出为 WebNovel 版？默认按“保留核心
 - 绝对禁止输出“抽象自述 + 动词模板 + 口径名词”的垃圾句群；凡出现类似“对照项落在… / 先把同一句话拆碎 / 先把顺滑的解释拆开 / 只求能追溯（复核、对得上）”等模板化短语，必须判定为污染并整稿回炉。
 - 严禁使用或间接调用以下脚本对正文做生成、扩写、拼接或降重：`scripts/append_cn_unique_monologue.ps1`、`scripts/append_cn_unique_narration.ps1`、`scripts/append_cn_unique_thirdperson.ps1`、`scripts/rephrase_cn_body.ps1`、`scripts/rephrase_en_body.ps1`、`scripts/cn_lexicon_profile_transform.ps1`。这些工具不得进入平台正文生产链路。
 - 平台稿新增“模板句污染清零门禁”：正文不得出现连续 2 句及以上“我/我这边/我心里… + 把/将… + 对齐/校准/锁死/拆开… + 连接词 + 口径名词 + 只求/不求/先把…”结构；命中即失败，不论字数与相似度是否通过。
+- 平台连续章必须服从已锁定的 `platformPovContract`；不得在本 Skill 内擅自把前序稳定链路改成新的 POV 链路。
+- 若命中未授权 POV 切换或 POV 校验失败，必须按 `pov_drift_detected` / `pov_switch_without_approval` 判定失败并整稿回炉。
 
 - 命中本技能时，必须同时加载对应题材的 `题材名-输出WebNovel版` Skill。
 - 题材特有规则不得回写到本文件中平行维护。

@@ -10,12 +10,14 @@ argument-hint: '要处理哪份线索/伏笔台账？默认同时检查字段结
 
 ## 继续读取的 references
 
+- `references/伏笔类型分类与回收周期.md`（**必读** — 四大伏笔类型与标准回收周期）
+- `references/伏笔回收质量评级与占比目标.md`（按需必读 — 回收质量分布监控）
 - `references/台账字段与分层规则.md`
 - `references/回收窗口与兑现检查.md`
 - `references/超长篇伏笔台账与回收节奏.md`
 - `references/推理公平性与谜底兑现检查.md`
- - `references/腾讯专栏悬疑线索与铺垫规则增补.md`
- - `references/腾讯专栏铺垫反转关系与伏笔回收增补.md`
+- `references/腾讯专栏悬疑线索与铺垫规则增补.md`
+- `references/腾讯专栏铺垫反转关系与伏笔回收增补.md`
 
 ## 常见触发词 / 用户说法速查
 

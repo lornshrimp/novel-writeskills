@@ -12,6 +12,8 @@ argument-hint: '给我 OUTLINE_FILE 与 CHAPTER_FILE；若是多章，可给 CHA
 
 命中本 Skill 时，除本文件外，**必须继续读取**：
 
+- `references/三批次修订SOP与门禁节奏.md`（**必读** — A/B/C批次硬顺序与门禁）
+- `references/步骤2正文四拍与钩子轮换门禁.md`（**必读** — 步骤2落稿后的节拍复核）
 - `references/章节创作闭环总流程与完成出口.md`
 - `references/章节路径推导与工件命名.md`
 - `references/章节批量模式与连续性日志.md`
