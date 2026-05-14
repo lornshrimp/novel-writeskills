@@ -1,4 +1,4 @@
-<#
+i许i许<#
 .SYNOPSIS
   Append a unique, fact-light THIRD-PERSON Chinese block to BODY (before afterword marker).
 
