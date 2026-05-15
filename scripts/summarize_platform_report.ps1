@@ -1,10 +1,10 @@
 <#
 .SYNOPSIS
-  Summarize platform gate validation report (platform_validate.ps1 output).
+  汇总平台门禁验证报告（platform_validate.ps1 输出）。
 
 .DESCRIPTION
-  Prints per-platform key metrics and a failure list.
-  Safe: does not print chapter body text.
+  打印每个平台的关键指标和失败列表。
+  安全：不打印章节正文。
 
 .USAGE
   ./scripts/summarize_platform_report.ps1 -ReportPath "SOP执行日志/平台校验_1.1.37_2026-02-17_RECHECK.v2.json"

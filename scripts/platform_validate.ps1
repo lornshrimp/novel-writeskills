@@ -1,18 +1,18 @@
 <#!
 .SYNOPSIS
-  Validate multi-platform chapter outputs against gates defined in a JSON config.
+  根据JSON配置中定义的门禁验证多平台章节输出。
 
 .DESCRIPTION
-  PowerShell equivalent of scripts/platform_validate.py.
-  - Computes metrics on body only (content before marker "## 作者有话说").
-  - Computes afterword metrics on content after the marker.
-  - Outputs JSON array with a per-file record including meetsAll.
+  scripts/platform_validate.py 的PowerShell等价物。
+  - 仅对正文（标记"## 作者有话说"前的内容）计算指标。
+  - 对标记后的内容计算后记指标。
+  - 输出包含每个文件记录的JSON数组，包括meetsAll。
 
 .USAGE
   ./scripts/platform_validate.ps1 -ConfigPath "SOP执行日志/平台校验_1.1.14_2026-02-08.config.json" -OutPath "SOP执行日志/平台校验_1.1.14_2026-02-08.json"
 
 .NOTES
-  Avoids printing chapter正文内容; only outputs metrics.
+  避免打印章节正文内容；仅输出指标。
 #>
 
 [CmdletBinding()]
@@ -95,7 +95,7 @@ function Get-MarkerCn {
 }
 
 function Get-Markers {
-  # Support both Chinese and English markers across platforms.
+  # 支持跨平台的中文和英文标记。
   return @(
     (Get-MarkerCn),
     "## Author's Note"
@@ -212,11 +212,11 @@ foreach ($item in $items) {
     $m.totalLen = $text.Length
     $m.totalCJK = $CjkRe.Matches($text).Count
 
-    # Split strictly by the marker specified in config.
-    # SOP口径：正文以“## 作者有话说”前为准（或config显式指定的marker）。
-    # NOTE: Do NOT fall back to other markers here; fallback can cause false splits
-    # when a different marker string appears inside body text (e.g. English platforms
-    # or embedded notes), breaking length/CJK gates.
+    # 严格按配置中指定的标记进行分割。
+    # SOP口径：正文以"## 作者有话说"前为准（或config显式指定的marker）。
+    # 注意：不要在此回退到其他标记；回退可能会导致误分割
+    # 当不同的标记字符串出现在正文中时（例如英文平台
+    # 或嵌入式注释），会破坏长度/CJK门禁。
     $candidateMarkers = @()
     if ($marker) {
       $candidateMarkers += @([string]$marker)

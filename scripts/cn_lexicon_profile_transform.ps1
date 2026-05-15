@@ -1,14 +1,14 @@
 <#
 .SYNOPSIS
-  Apply a platform-specific lexicon to Chinese BODY (before afterword marker).
+  将特定平台的词汇应用于中文正文（后记标记之前）。
 
 .DESCRIPTION
-  Goal: reduce 5-char shingle overlap across Chinese platform variants by enforcing
-  different, consistent term choices (lexicon) per platform.
+  目标：通过对每个平台强制不同的、一致的术语选择（词汇）来减少
+  中文平台变体之间的5字符有单元重叠。
 
-  - Operates ONLY on BODY (marker前). Afterword untouched.
-  - Replacement list is profile-specific and deterministic.
-  - Outputs numeric metrics only; never prints chapter正文.
+  - 仅在正文上操作（标记前）。后记不变。
+  - 替换列表是特定配置文件的和确定性的。
+  - 仅输出数值指标；从不打印章节正文。
 
 .USAGE
   pwsh -NoProfile -File ./scripts/cn_lexicon_profile_transform.ps1 -Path "知乎/...md" -Profile zhihu

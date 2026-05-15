@@ -1,6 +1,6 @@
 <#!
 .SYNOPSIS
-Count words in the afterword section (starting at a marker such as "## 作者有话说").
+计算后记部分中的单词（从"## 作者有话说"这样的标记开始）。
 #>
 
 [CmdletBinding()]

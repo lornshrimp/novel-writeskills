@@ -17,7 +17,7 @@ $ErrorActionPreference = 'Stop'
 function Get-TitleBodyLen([string]$s) {
   if ($null -eq $s) { return 0 }
   $t = $s.Trim()
-  # Length rule: do not count whitespace characters.
+  # 长度规则：不计算空白字符。
   $t2 = ($t -replace '\s+','')
   return ($t2.ToCharArray()).Count
 }
@@ -31,8 +31,8 @@ function Update-FirstChapterHeading([string]$filePath, [string]$newTitle) {
   for ($i = 0; $i -lt $lines.Length; $i++) {
     $line = $lines[$i]
 
-    # Prefer: '# 第X章：标题' or '# 第X章:标题'
-    # Some files may start with a UTF-8 BOM, so allow optional \uFEFF before '#'.
+    # 优先：'# 第X章：标题' 或 '# 第X章:标题'
+    # 有些文件可能以UTF-8 BOM开头，所以允许'#'前面有可选的\uFEFF。
     if ($line -match '^(?:\uFEFF)?(#\s*第[^：:]+)([：:])\s*(.*)$') {
       $prefix = $Matches[1]
       $colon = $Matches[2]
@@ -41,7 +41,7 @@ function Update-FirstChapterHeading([string]$filePath, [string]$newTitle) {
       break
     }
 
-    # Fallback: '# 第X章 标题'
+    # 回退：'# 第X章 标题'
     if ($line -match '^(?:\uFEFF)?(#\s*)(第\d+章)\s+(.+)$') {
       $hash = $Matches[1]
       $chap = $Matches[2]
@@ -50,7 +50,7 @@ function Update-FirstChapterHeading([string]$filePath, [string]$newTitle) {
       break
     }
 
-    # Stop early if we passed the initial front-matter-ish region.
+    # 如果我们通过了初始前置物区域，则提前停止。
     if ($i -ge 30) { break }
   }
 

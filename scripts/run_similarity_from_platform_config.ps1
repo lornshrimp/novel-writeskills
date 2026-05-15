@@ -1,12 +1,12 @@
 <#
 .SYNOPSIS
-  Helper runner to execute chapter similarity gate using an existing platform validation config.
+  帮助程序运行程序，使用现有平台验证配置执行章节相似性门禁。
 
 .DESCRIPTION
-  Reads a platform validation config JSON ("files[].path") and prepends the source chapter path.
-  Then calls ./scripts/chapter_similarity_check.ps1 with a proper [string[]] -Path parameter.
+  读取平台验证配置JSON（"files[].path"）并预置源章节路径。
+  然后使用适当的[string[]] -Path参数调用 ./scripts/chapter_similarity_check.ps1。
 
-  This exists to avoid fragile command-line quoting/escaping when passing many paths.
+  这是为了避免在传递许多路径时进行脆弱的命令行引用/转义。
 
 .USAGE
   pwsh -NoProfile -File ./scripts/run_similarity_from_platform_config.ps1 \

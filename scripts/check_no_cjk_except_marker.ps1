@@ -1,13 +1,13 @@
 <#!
 .SYNOPSIS
-  Fail if a markdown file contains any CJK characters except the exact marker line.
+  如果Markdown文件包含除确切标记行外的任何CJK字符，则失败。
 
 .DESCRIPTION
-  Designed for English-platform outputs where the only allowed CJK is the separator heading:
+  为英文平台输出设计，其中唯一允许的CJK是分隔符标题：
     ## 作者有话说
 
-  This script reads each file as UTF-8 (best-effort), removes marker lines,
-  fenced code blocks, and inline code spans, then counts CJK.
+  此脚本将每个文件读取为UTF-8（尽力而为），移除标记行、
+  栅栏代码块和内联代码跨度，然后计数CJK。
 #>
 
 [CmdletBinding()]

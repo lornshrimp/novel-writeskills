@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-  Quick diagnostic: compute body length and afterword word count using English marker.
+  快速诊断：使用英文标记计算正文长度和后记字数。
 
 .USAGE
   pwsh -NoProfile -File ./scripts/diag_en_marker_metrics.ps1

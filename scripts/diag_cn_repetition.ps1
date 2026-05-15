@@ -1,17 +1,17 @@
 <#
 .SYNOPSIS
-  Diagnose repetitive / filler-like patterns in Chinese chapter BODY text (marker前) without printing正文.
+  诊断中文章节正文中的重复/填充类模式（标记前）而无需打印正文。
 
 .DESCRIPTION
-  For each file:
-  - Split BODY (before marker) into coarse sentences (。！？ and newline).
-  - Normalize by removing whitespace.
-  - Report counts: body CJK chars, sentence total, unique sentence hashes, duplicate sentence types,
-    duplicate occurrences, max duplicate times.
-  Across files:
-  - Compute sentence-hash Jaccard overlap and intersection counts.
+  对每个文件：
+  - 将正文（标记前）分割为粗糙句子（。！？ 和换行）。
+  - 通过移除空白进行规范化。
+  - 报告计数：正文CJK字符、句子总数、唯一句子哈希、重复句子类型、
+    重复出现、最大重复次数。
+  跨文件：
+  - 计算句子哈希Jaccard重叠和交集计数。
 
-  IMPORTANT: This script never prints the raw text content; only numeric metrics + hashes.
+  重要：此脚本不打印原始文本内容；仅打印数值指标+哈希。
 
 .USAGE
   pwsh -NoProfile -File ./scripts/diag_cn_repetition.ps1 -Paths @('a.md','b.md') -OutPath 'SOP执行日志/diag_rep.json'

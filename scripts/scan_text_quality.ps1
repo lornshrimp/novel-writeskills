@@ -1,3 +1,15 @@
+# 该脚本用于扫描章节正文中的元叙述（自指短语如"前几章"、"下一章"、"后文会"）。
+# 仅提取正文（"## 作者有话说"前的内容）。
+# 检测短语家族（可配置的模式）并计算违规数。
+# 章节Markdown的路径。
+# "json"或"plaintext"输出格式。
+# powershell -NoProfile -ExecutionPolicy Bypass scripts\scan_text_quality.ps1 -InputFile "都市悬疑/小说名/第一卷/1.1.1-开启.md" -Mode json
+# 元叙述检测的模式家族
+# 家族1：前几章引用（前面的/前几章）
+# 家族2：本章引用（这章/本章）
+# 家族3：下一章引用（下一章）
+# 家族4：未来叙述（后文会/我们会看到）
+# 正文在第一次出现后记标记时结束。
 param(
   [Parameter(Mandatory=$false)]
   [string[]] $Paths = @(),

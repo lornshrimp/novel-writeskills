@@ -1,17 +1,17 @@
 <#
 .SYNOPSIS
-  Remove Unicode Private Use Area characters (PUA) and other invisible/control junk from markdown/text files.
+  从Markdown/文本文件中移除Unicode私有使用区字符（PUA）和其他不可见/控制垃圾。
 
 .DESCRIPTION
-  This repo has strict rules forbidding "noise paragraphs" and meaningless characters.
-  In practice, hidden characters in the Unicode Private Use category (\p{Co}) may appear as garbled boxes
-  or nonsense in different editors/platforms.
+  此仓库有严格的规则禁止"噪声段落"和无意义的字符。
+  实际上，Unicode私有使用类别（\p{Co}）中的隐藏字符可能显示为乱码框
+  或在不同的编辑器/平台中无意义。
 
-  This script:
-  - Creates a timestamped .bak backup (unless -NoBackup).
-  - Removes all Unicode Private Use characters (regex: \p{Co}).
-  - Removes control characters (Unicode category Cc) except TAB/CR/LF.
-  - Optionally removes common zero-width characters.
+  此脚本：
+  - 创建带时间戳的 .bak 备份（除非-NoBackup）。
+  - 移除所有Unicode私有使用字符（正则表达式：\p{Co}）。
+  - 移除控制字符（Unicode类别Cc），除了TAB/CR/LF。
+  - 可选地移除常见的零宽度字符。
 
   Does NOT print chapter正文; only prints counts.
 

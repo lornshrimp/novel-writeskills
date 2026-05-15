@@ -1,18 +1,18 @@
 <#
 .SYNOPSIS
-  Normalize multi-platform chapter markdown files to align with platform_validate gates (WITHOUT auto-padding).
+  规范化多平台章节Markdown文件以对齐平台验证门禁（不自动填充）。
 
 .DESCRIPTION
-  - Reads the same config JSON used by scripts/platform_validate.ps1.
-  - Ensures the afterword marker exists.
-  - Optionally removes legacy PAD_TO_GATE/UID-like padding paragraphs (RefreshPadding).
-  - For English afterword max-words gates: trims afterword to max words (best-effort).
+  - 读取 scripts/platform_validate.ps1 使用的相同配置JSON。
+  - 确保后记标记存在。
+  - 可选地移除遗留的PAD_TO_GATE/UID类填充段落（RefreshPadding）。
+  - 对于英文后记最大字数门禁：将后记修剪到最大字数（尽力而为）。
 
-  NOTE
-    This script intentionally DOES NOT auto-generate/pad synthetic filler to meet min gates.
-    If an output does not meet minCJK/minLen/minAfterword thresholds, fix the content by rewriting.
+  注意
+    此脚本故意不自动生成/填充合成填充以满足最小门禁。
+    如果输出不满足minCJK/minLen/minAfterword阈值，通过重写来修复内容。
 
-  IMPORTANT: This script does NOT print chapter正文; it only prints numeric metrics.
+  重要：此脚本不打印章节正文；它仅打印数值指标。
 
 .USAGE
   ./scripts/pad_to_gate.ps1 -ConfigPath "SOP执行日志/平台校验_1.1.7_2026-02-11.config.json"

@@ -1,14 +1,14 @@
 <#
 .SYNOPSIS
-  Reflow/restore paragraph breaks in Chinese markdown BODY (before afterword marker).
+  重排/恢复中文Markdown正文中的段落换行（后记标记之前）。
 
 .DESCRIPTION
-  This script is a recovery utility. If a previous cleanup accidentally collapsed newlines,
-  it heuristically re-inserts paragraph breaks to make the chapter readable again.
+  此脚本是一个恢复实用程序。如果先前的清理意外地折叠了换行，
+  它启发式地重新插入段落换行以使章节再次可读。
 
-  - Operates ONLY on BODY (text before marker). Afterword is untouched.
-  - Heuristic only: prioritizes readability and gate compatibility, not literary perfection.
-  - Never prints chapter正文.
+  - 仅在正文上操作（标记前的文本）。后记不变。
+  - 仅启发式：优先考虑可读性和门禁兼容性，而不是文学完美。
+  - 从不打印章节正文。
 
 .USAGE
   pwsh -NoProfile -File ./scripts/reflow_cn_markdown_body.ps1 -Path "知乎/...md"

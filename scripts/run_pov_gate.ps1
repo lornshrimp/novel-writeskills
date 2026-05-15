@@ -1,11 +1,11 @@
 <#
 .SYNOPSIS
-  Run POV drift validation for files listed in a platform config.
+  对平台配置中列出的文件运行POV漂移验证。
 
 .DESCRIPTION
-  Uses scripts/pov_validate.py per file and writes a JSON summary.
-  Does not print chapter正文.
-  Always exits 0 (safe for SOP pipelines); rely on printed PASS/FAIL.
+  对每个文件使用 scripts/pov_validate.py 并写入JSON摘要。
+  不打印章节正文。
+  总是以0退出（对SOP管道安全）；依赖打印的PASS/FAIL。
 #>
 
 [CmdletBinding()]

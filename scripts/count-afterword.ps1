@@ -1,26 +1,26 @@
 <#
 .SYNOPSIS
-Count the length of the "afterword" section (starting at a marker such as "## 作者有话说") in one or more Markdown files.
+计算一个或多个Markdown文件中"作者有话说"部分（从"## 作者有话说"这样的标记开始）的长度。
 
 .DESCRIPTION
-- Treats content from the marker to the next level-2 heading (if any) as "作者有话说" content.
-- Reports total character length and CJK (Unified Ideographs) count.
-- Intended for validating platform constraints like "作者有话说 200–300 字".
+- 将从标记到下一个级别2标题（如果有）的内容视为"作者有话说"内容。
+- 报告总字符长度和CJK（统一表意文字）计数。
+- 用于验证平台约束，如"作者有话说 200–300 字"。
 
 .PARAMETER Path
-One or more file paths. Supports pipeline input.
+一个或多个文件路径。支持管道输入。
 
 .PARAMETER Marker
-Marker string that separates正文 and afterword. Default: "## 作者有话说".
+分隔正文和作者有话说的标记字符串。默认值："## 作者有话说"。
 
 .PARAMETER MinCJK
-Minimum required CJK character count. Default: 200.
+最小必需的CJK字符数。默认值：200。
 
 .PARAMETER MaxCJK
-Maximum allowed CJK character count. Default: 300.
+最大允许的CJK字符数。默认值：300。
 
 .PARAMETER Encoding
-File encoding for Get-Content. Default: UTF8.
+Get-Content的文件编码。默认值：UTF8。
 
 .EXAMPLE
 pwsh -NoProfile -File ./scripts/count-afterword.ps1 -Path "知乎/1.算法审判/.../1.2.11 ...md"

@@ -1,13 +1,13 @@
 <#
 .SYNOPSIS
-  Rephrase English BODY text (before the afterword marker) using heuristic substitutions.
+  使用启发式替换改述英文正文文本（后记标记之前）。
 
 .DESCRIPTION
-  Purpose: reduce shingle overlap between English platform variants.
-  - Operates ONLY on BODY (text before marker). Afterword is untouched.
-  - Uses seeded RNG for reproducibility.
-  - Outputs numeric metrics only; never prints chapter正文.
-  - Inserts only discourse markers (no concrete new story facts).
+  目的：减少英文平台变体之间的有单元重叠。
+  - 仅在正文上操作（标记前的文本）。后记不变。
+  - 使用有种子RNG以实现可重复性。
+  - 仅输出数值指标；从不打印章节正文。
+  - 仅插入话语标记（无具体的新故事事实）。
 
 .USAGE
   pwsh -NoProfile -File ./scripts/rephrase_en_body.ps1 -Path "WebNovel/...md" -Seed 64001 -Mode strong

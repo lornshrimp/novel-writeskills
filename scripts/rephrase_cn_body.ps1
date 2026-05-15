@@ -1,17 +1,17 @@
 <#
 .SYNOPSIS
-  Rephrase Chinese BODY text (before afterword marker) using probabilistic substitution rules.
+  使用概率替换规则改述中文正文文本（后记标记之前）。
 
 .DESCRIPTION
-  Purpose: reduce shingle overlap against the source chapter by altering contiguous character
-  sequences in platform variants, while keeping meaning broadly intact.
+  目的：通过改变平台变体中的连续字符
+  序列来减少与源章节的有单元重叠，同时保持含义基本不变。
 
-  - Operates ONLY on BODY (text before marker). Afterword is untouched.
-  - Uses seeded RNG for reproducibility.
-  - Outputs numeric metrics only; never prints chapter正文.
+  - 仅在正文上操作（标记前的文本）。后记不变。
+  - 使用有种子RNG以实现可重复性。
+  - 仅输出数值指标；从不打印章节正文。
 
-  This is a heuristic rephraser (not an AI paraphraser). It relies on small phrase swaps
-  and light discourse insertions.
+  这是一个启发式改述器（不是AI改述器）。它依赖于小短语交换
+  和轻话语插入。
 
 .USAGE
   pwsh -NoProfile -File ./scripts/rephrase_cn_body.ps1 \

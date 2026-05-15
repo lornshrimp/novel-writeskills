@@ -2,10 +2,10 @@
 
 <#
 .SYNOPSIS
-  Summarize similarity QA report (chapter_similarity_check.ps1 output).
+  汇总相似性QA报告（chapter_similarity_check.ps1 输出）。
 
 .DESCRIPTION
-  Prints qa.* and top-N highest-sim pairs (by shingle_containment_max). Does not print body text.
+  打印qa.*和排名前N的最高相似度对（按shingle_containment_max）。不打印正文。
 
 .USAGE
   ./scripts/summarize_similarity_report.ps1 -ReportPath "SOP执行日志/相似度终检_1.1.37_shingle5_QA_2026-02-17_RECHECK.v2.json" -TopN 10

@@ -1,12 +1,12 @@
 <#
 .SYNOPSIS
-  Run text quality scan for files listed in a platform config.
+  对平台配置中列出的文件运行文本质量扫描。
 
 .DESCRIPTION
-  Wraps scripts/scan_text_quality.ps1.
-  Writes a JSON report and prints a concise summary (no正文).
-  Reports QUALITY_NOT_PASSED when any flag is present, including body-only meta-narration hits.
-  Always exits 0 (safe for SOP pipelines).
+  包装 scripts/scan_text_quality.ps1。
+  写入JSON报告并打印简明摘要（无正文）。
+  当存在任何标志时报告QUALITY_NOT_PASSED，包括仅正文的元叙述命中。
+  总是以0退出（对SOP管道安全）。
 #>
 
 [CmdletBinding()]

@@ -1,14 +1,14 @@
 <#
 .SYNOPSIS
-  Remove auto-inserted short Chinese sentences from BODY (before afterword marker).
+  从正文（后记标记之前）移除自动插入的短中文句子。
 
 .DESCRIPTION
-  This is a safety cleanup for heuristic rephrase runs that used sentence-end insertions.
-  It removes a fixed list of short, generic insert sentences that can accidentally land
-  inside dialogue quotes and harm readability.
+  这是对使用句尾插入的启发式改述运行的安全清理。
+  它移除一个固定列表中的短的、通用的插入句子，这些句子可能意外地
+  落在对话引号内并损害可读性。
 
-  - Operates ONLY on BODY (text before marker). Afterword is untouched.
-  - Writes metrics only; never prints chapter正文.
+  - 仅在正文（标记之前的文本）上操作。后记不变。
+  - 仅写入指标；从不打印章节正文。
 
 .USAGE
   pwsh -NoProfile -File ./scripts/cleanup_cn_sentence_inserts.ps1 -Path "知乎/...md" -SeedTag 44150

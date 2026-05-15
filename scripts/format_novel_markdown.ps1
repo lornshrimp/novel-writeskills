@@ -1,28 +1,28 @@
 <#!
 .SYNOPSIS
-  Format novel markdown outputs for readability (minimal, whitespace-only).
+  格式化小说Markdown输出以提高可读性（仅最小化空白）。
 
 .DESCRIPTION
-  - Normalizes newlines to LF, trims trailing spaces, ensures final newline.
-  - Ensures blank line after the top-level title heading and around headings.
-  - Optional auto paragraphing for "unformatted" files: inserts blank lines after Chinese sentence-ending punctuation.
-    This is only applied when the file looks like a single huge paragraph (few blank lines + very long lines).
+  - 将换行符规范化为LF，修剪尾随空格，确保最后有换行符。
+  - 确保顶级标题后有空白行，标题周围有空白行。
+  - 可选的自动分段功能：为"未格式化"的文件在中文句子结尾标点后插入空白行。
+    仅在文件看起来像单个巨大段落（少数空白行+很长的行）时应用。
 
-  Safety:
-  - Creates a timestamped .bak copy by default.
-  - Does NOT change wording (only whitespace/newlines).
+  安全性：
+  - 默认创建带时间戳的 .bak 备份副本。
+  - 不改变措辞（仅空白/换行）。
 
 .PARAMETER Paths
-  Input file paths.
+  输入文件路径。
 
 .PARAMETER PathsJoined
-  Alternative to -Paths. Use '|' delimited list for Windows paths.
+  -Paths的替代方案。对Windows路径使用'|'分隔的列表。
 
 .PARAMETER NoBackup
-  Do not create .bak backup.
+  不创建 .bak 备份。
 
 .PARAMETER WhatIf
-  Report what would change without writing.
+  报告会改变什么但不写入。
 
 .EXAMPLE
   powershell -NoProfile -ExecutionPolicy Bypass -File scripts\format_novel_markdown.ps1 -PathsJoined "a.md|b.md"

@@ -1,14 +1,14 @@
 <#
 .SYNOPSIS
-  Normalize Chinese BODY paragraphs to a clean sentence/paragraph layout (before afterword marker).
+  将中文正文段落规范化为清洁的句子/段落布局（后记标记之前）。
 
 .DESCRIPTION
-  Recovery utility for cases where BODY line breaks became corrupted (single-line, hard-wrapped,
-  or broken mid-sentence). It rebuilds paragraph breaks based primarily on sentence enders.
+  恢复实用程序，用于正文换行变损坏的情况（单行、硬换行、
+  或在句子中间断裂）。它主要基于句子结尾符重建段落换行。
 
-  - Operates ONLY on BODY (text before marker). Afterword is untouched.
-  - Does not change words/punctuation; only whitespace/newlines.
-  - Never prints chapter正文.
+  - 仅在正文（标记前的文本）上操作。后记不变。
+  - 不改变单词/标点；仅改变空白/换行。
+  - 从不打印章节正文。
 
 .USAGE
   pwsh -NoProfile -File ./scripts/normalize_cn_body_paragraphs.ps1 -Path "豆瓣/...md"

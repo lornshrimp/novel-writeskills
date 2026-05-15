@@ -1,18 +1,17 @@
 <#
 .SYNOPSIS
-  Reduce similarity by pruning some BODY sentences (before appendix separator and afterword marker).
+  通过剪除某些正文句子来降低相似性（在附录分隔符和后记标记之前）。
 
 .DESCRIPTION
-  This script is intended for stubborn source-vs-platform similarity cases where containment is
-  dominated by shared contiguous text. It reduces overlap by removing a controlled subset of
-  low-salience sentences from the platform variant.
+  此脚本用于顽固的源-平台相似性情况，其中包含主要由共享的连续文本主导。
+  它通过从平台变体中移除低显著性句子的受控子集来减少重叠。
 
-  Safety rails:
-  - Only edits BODY (marker前). Afterword untouched.
-  - If an appendix separator ("\n---\n" or "### 追加材料（") exists, only prunes the main narrative
-    portion before it.
-  - Avoids pruning sentences containing digits/ASCII letters or protected keywords.
-  - Maintains a minimum CJK count (default 2700) for the BODY.
+  安全护栏：
+  - 仅编辑正文（标记前）。后记不变。
+  - 如果存在附录分隔符（"\n---\n"或"### 追加材料（"），仅剪除其前的主叙述
+    部分。
+  - 避免剪除包含数字/ASCII字母或受保护关键字的句子。
+  - 为正文维持最小CJK计数（默认2700）。
   - Outputs metrics only and writes a JSON report under SOP执行日志.
 
 .USAGE

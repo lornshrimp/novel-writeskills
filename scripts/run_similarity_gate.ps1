@@ -1,14 +1,14 @@
 <#
 .SYNOPSIS
-  Run cross-platform similarity check and print a safe summary (no正文).
+  运行跨平台相似性检查并打印安全摘要（无正文）。
 
 .DESCRIPTION
-  Wraps chapter_similarity_check.ps1 and prints:
-  - report path
-  - computed max shingle_containment_max + pair
-  - PASS/FAIL against threshold
+  包装 chapter_similarity_check.ps1 并打印：
+  - 报告路径
+  - 计算的最大 shingle_containment_max + 对
+  - 相对于阈值的PASS/FAIL
 
-  Always exits 0 to avoid breaking a larger SOP pipeline.
+  总是以0退出以避免破坏更大的SOP管道。
 
 .USAGE
   ./scripts/run_similarity_gate.ps1 -ConfigPath "SOP执行日志/平台校验_1.1.62_2026-02-20_11-02-30.config.json" -OutPath "SOP执行日志/相似度终检_1.1.62_shingle5_2026-02-20_修复后.json" -Threshold 0.199 -TopN 10

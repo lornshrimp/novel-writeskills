@@ -1,12 +1,12 @@
 <#!
 .SYNOPSIS
-  Remove random blocks inserted by append_random_block_before_marker.ps1.
+  移除由 append_random_block_before_marker.ps1 插入的随机块。
 
 .DESCRIPTION
-  Deletes any block from a line that starts with "%%BEGIN-" through the matching
-  "%%END-" line (inclusive), preserving the rest of the file.
+  删除以"%%BEGIN-"开头到匹配的
+  "%%END-"行（包括）的任何块，保留文件的其余部分。
 
-  Does NOT print chapter正文; only prints counts and length delta.
+  不打印章节正文；仅打印计数和长度差。
 #>
 
 [CmdletBinding()]

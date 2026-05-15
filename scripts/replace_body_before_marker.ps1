@@ -1,13 +1,13 @@
 <#
 .SYNOPSIS
-  Replace BODY content (before afterword marker) of a chapter markdown file with user-provided text.
+  用用户提供的文本替换章节Markdown文件的正文内容（后记标记之前）。
 
 .DESCRIPTION
-  Safe mechanical operation used for SOP runs:
-  - Only replaces the BODY (content before marker).
-  - Preserves the marker line and everything after it (afterword/Author's Note).
-  - Can optionally forbid CJK in the new BODY (for English-platform rules).
-  - Produces a JSON report with numeric metrics only (never prints chapter正文).
+  用于SOP运行的安全机械操作：
+  - 仅替换正文（标记之前的内容）。
+  - 保留标记行和之后的所有内容（后记/作者有话说）。
+  - 可选地禁止在新正文中使用CJK（对于英文平台规则）。
+  - 产生包含仅数值指标的JSON报告（不打印章节正文）。
 
 .USAGE
   pwsh -NoProfile -File ./scripts/replace_body_before_marker.ps1 \

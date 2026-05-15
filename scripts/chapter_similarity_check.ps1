@@ -1,16 +1,16 @@
 <#
 .SYNOPSIS
-  Similarity & repetition checks for multi-platform chapter markdown (PowerShell edition).
+  多平台章节Markdown的相似性和重复性检查（PowerShell版本）。
 
 .DESCRIPTION
-  PowerShell implementation of the chapter similarity gate (preferred; avoids Python slowdowns).
-  - Computes metrics on body only (content before marker "## 作者有话说").
-  - Inter-file similarity uses shingle overlap on body.
-    * CJK-containing text: character shingles
-    * Non-CJK text: token (word) shingles
-  - Optional QA gate: fail (exit code 2) when any pair exceeds threshold.
+  章节相似性门禁的PowerShell实现（首选；避免Python缓慢）。
+  - 仅对正文计算指标（"## 作者有话说"标记前的内容）。
+  - 文件间相似性使用正文上的有单元重叠。
+    * 包含CJK的文本：字符有单元
+    * 非CJK文本：令牌（单词）有单元
+  - 可选QA门禁：当任何对超过阈值时失败（退出代码2）。
 
-  Outputs JSON only (no chapter正文 content).
+  仅输出JSON（无章节正文内容）。
 
 .USAGE
   ./scripts/chapter_similarity_check.ps1 -Path a.md,b.md -OutPath report.json -CheckMaxSim -MaxSim 0.199 -QAMetric shingle_containment_max -ShingleN 5

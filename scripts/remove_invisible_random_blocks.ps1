@@ -1,18 +1,18 @@
 <#
 .SYNOPSIS
-  Remove previously injected invisible random ASCII blocks (HTML comments) from markdown files.
+  从Markdown文件中移除之前注入的不可见随机ASCII块（HTML注释）。
 
 .DESCRIPTION
-  Deletes blocks like:
+  删除如下块：
     <!-- INV-RAND-BEGIN:... -->
-    ...many ASCII lines...
+    ...许多ASCII行...
     <!-- INV-RAND-END:... -->
 
-  Also handles labels like INV-RAND2, INV-RAND3, etc.
-  Creates a timestamped .bak backup before writing.
+  也处理INV-RAND2、INV-RAND3等标签。
+  在写入前创建带时间戳的 .bak 备份。
 
 .NOTES
-  - Intended for cleaning up readability / publication text.
+  - 用于清理可读性/发布文本。
   - If you remove these blocks, similarity dilution will be reduced and a prior similarity QA may no longer pass.
 #>
 
