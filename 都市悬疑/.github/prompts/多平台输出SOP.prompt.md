@@ -60,7 +60,7 @@ agent: agent
 
 默认全平台：
 
-- 番茄、七猫、知乎、豆瓣、出版社、微信订阅号、百度百家号、小红书、B站、新浪微博、纵横中文网、My Fiction、GoodNovel、WebNovel
+- 番茄、七猫、知乎、豆瓣、出版社、微信订阅号、百度百家号、小红书、B站、新浪微博、纵横中文网、今日头条、My Fiction、GoodNovel、WebNovel
 
 ## 路径与编号的入口级硬约束
 
