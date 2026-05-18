@@ -39,7 +39,12 @@ $paths = @($items | ForEach-Object { $_.path })
 $j = Get-Content -LiteralPath $OutPath -Raw -Encoding UTF8 | ConvertFrom-Json
 
 $results = @($j.results)
-$flagged = @($results | Where-Object { $_.flags -and @($_.flags).Count -gt 0 })
+$flagged = @(
+  $results | Where-Object {
+    $flagsProp = $_.PSObject.Properties['flags']
+    $null -ne $flagsProp -and $null -ne $flagsProp.Value -and @($flagsProp.Value).Count -gt 0
+  }
+)
 
 if ($flagged.Count -eq 0) {
   Write-Output 'QUALITY_ALL_CLEAR'
