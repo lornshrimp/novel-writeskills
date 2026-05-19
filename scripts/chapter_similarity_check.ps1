@@ -29,7 +29,7 @@ param(
   [switch]$CheckMaxSim,
 
   [Parameter()]
-  [double]$MaxSim = 0.5,
+  [double]$MaxSim = 0.2,
 
   [Parameter()]
   [ValidateSet('shingle_containment_max','shingle_jaccard')]
